@@ -9,6 +9,8 @@ mystery_word = random.choice(words).upper()
 found_letters = []
 hidden_word = hide_word(mystery_word, found_letters)
 tries = 7
+if len(mystery_word) > 7:
+    tries += 2
 
 while hidden_word != mystery_word and tries > 0:
     print(f"Le mot à trouver est {hidden_word}")
@@ -23,6 +25,6 @@ while hidden_word != mystery_word and tries > 0:
 if hidden_word == mystery_word:
     print(f"Vous avez gagné, le mot était {hidden_word}")
 else:
-    print("Vous avez été pendu, désolé")
+    print(f"Vous avez été pendu, désolé. Le mot à trouver était {mystery_word}")
 
 
