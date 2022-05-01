@@ -6,12 +6,13 @@
     <p>Le mot à trouver est {{ hidden_word }}</p>
     <p>Nombre de tentatives: {{ tries }}</p>
     <p>{{ result }}</p>
-
+    {% if not restart %}
     <form action="pendu" method="POST">
         {% csrf_token %}
-        <input type="text" name="letter_try" placeholder="Quelle lettre souhaitez vous essayer? ">
+        {{ form }}
         <input type="submit" value="Valider">
     </form>
+    {% endif %}
     {% if restart %}
         <a href="pendu"><button type="submit">Recommencer</button></a>
     {% endif %}

@@ -6,6 +6,7 @@ from django.core.cache import cache
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
+from LePendu.forms import LetterForm
 from helpers import hide_word
 from user.models import User
 
@@ -70,38 +71,46 @@ def pendu_view(request):
                         'found_letters': found_letters})
         if len(mystery_word) > 7:
             tries += 2
+        letter_form = LetterForm()
         return render(request,
                       'pendu.html', context={'mystery_word': mystery_word,
                                              'hidden_word': hidden_word, 'tries': tries,
-                                             'found_letters': found_letters})
+                                             'found_letters': found_letters, 'form': letter_form})
     elif request.method == "POST":
-        letter_try = request.POST.get("letter_try").upper()
+        form = LetterForm(request.POST)
         mystery_word = cache.get("mystery_word")
         found_letters = cache.get("found_letters")
         hidden_word = cache.get("hidden_word")
         tries = cache.get("tries")
-        print(mystery_word, ",", found_letters, ",", hidden_word)
-        if letter_try in mystery_word:
-            result = "Gagné"
-            found_letters.append(letter_try)
-            hidden_word = hide_word(mystery_word, found_letters)
-            cache.set_many({'mystery_word': mystery_word,
-                            'hidden_word': hidden_word, 'tries': tries,
-                            'found_letters': found_letters})
+        if form.is_valid():
+            letter_try = request.POST.get("letter_try").upper()
 
+            form = LetterForm()
+            print(mystery_word, ",", found_letters, ",", hidden_word)
+            if letter_try in mystery_word:
+                result = "Gagné"
+                found_letters.append(letter_try)
+                hidden_word = hide_word(mystery_word, found_letters)
+                cache.set_many({'mystery_word': mystery_word,
+                                'hidden_word': hidden_word, 'tries': tries,
+                                'found_letters': found_letters})
+
+            else:
+                tries -= 1
+                result = f"Perdu. Réessayez! Il vous reste {tries} tentatives"
+                cache.set_many({'mystery_word': mystery_word,
+                                'hidden_word': hidden_word, 'tries': tries,
+                                'found_letters': found_letters})
+
+            if hidden_word == mystery_word:
+                result = f"Vous avez gagné, le mot était {hidden_word}"
+                restart = True
+            elif tries == 0:
+                result = f"Vous avez été pendu, désolé. Le mot à trouver était {mystery_word}"
+                restart = True
+
+            return render(request,
+                          'pendu.html', locals())
         else:
-            tries -= 1
-            result = f"Perdu. Réessayez! Il vous reste {tries} tentatives"
-            cache.set_many({'mystery_word': mystery_word,
-                            'hidden_word': hidden_word, 'tries': tries,
-                            'found_letters': found_letters})
-
-        if hidden_word == mystery_word:
-            result = f"Vous avez gagné, le mot était {hidden_word}"
-            restart = True
-        elif tries == 0:
-            result = f"Vous avez été pendu, désolé. Le mot à trouver était {mystery_word}"
-            restart = True
-
-        return render(request,
-                      'pendu.html', locals())
+            return render(request,
+                          'pendu.html', locals())
