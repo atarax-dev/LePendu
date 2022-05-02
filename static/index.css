@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css?family=Mukta');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 body{
   font-family: 'Mukta', sans-serif;
 	height:100vh;
@@ -9,6 +9,7 @@ body{
 	background-position:center;
 	position:relative;
     overflow-y: visible;
+    box-sizing: border-box;
 }
 
 img{
@@ -153,21 +154,37 @@ a{
 }
 a{
   text-decoration:none;
-  color:#2c7715;
+  color:red;
 }
-
+.navet{
+    list-style-type: none;
+    color: red;
+    line-height: 40px;
 }
 .navbar{
-    position : right;
+    display: flex;
+    justify-content: space-between;
+    border: solid black 2px;
+    border-radius:20px;
+}
+#navbarNav{
+    margin-right: 40px;
+    text-align: center;
 }
 header{
-    border: 1px solid black;
-    margin-bottom: 0%;
+    height: 8%;
+    font-family: 'Indie Flower', cursive;
+}
+.feed{
+    margin-left: 20px;
+    margin-top: 100px;
 }
 
 .site_title{
     margin: 0 auto;
     text-align: center;
+    line-height: 50px;
+    font-size: 25px;
 }
 
 .username{
@@ -182,4 +199,7 @@ header{
     justify-content: center;
     flex-direction: row;
     align-items: center;
+}
+#id_letter_try{
+    width: 400px;
 }
