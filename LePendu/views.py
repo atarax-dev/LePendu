@@ -54,7 +54,6 @@ def logout_user(request):
     return redirect('/')
 
 
-@login_required
 def pendu_view(request):
     if request.method == "GET":
         words = ["corbeau", "amoral", "admission", "humeur", "cadeau", "complice", "bouche",
@@ -64,27 +63,31 @@ def pendu_view(request):
 
         mystery_word = random.choice(words).upper()
         found_letters = []
+        tried_letters = []
         hidden_word = hide_word(mystery_word, found_letters)
         tries = 7
         cache.set_many({'mystery_word': mystery_word,
                         'hidden_word': hidden_word, 'tries': tries,
-                        'found_letters': found_letters})
+                        'found_letters': found_letters, 'tried_letters': tried_letters})
         if len(mystery_word) > 7:
             tries += 2
         letter_form = LetterForm()
         return render(request,
                       'pendu.html', context={'mystery_word': mystery_word,
                                              'hidden_word': hidden_word, 'tries': tries,
-                                             'found_letters': found_letters, 'form': letter_form})
+                                             'found_letters': found_letters, 'form': letter_form,
+                                             'tried_letters': tried_letters})
     elif request.method == "POST":
         form = LetterForm(request.POST)
         mystery_word = cache.get("mystery_word")
         found_letters = cache.get("found_letters")
         hidden_word = cache.get("hidden_word")
         tries = cache.get("tries")
+        tried_letters = cache.get("tried_letters")
         if form.is_valid():
             letter_try = request.POST.get("letter_try").upper()
-
+            if letter_try not in tried_letters:
+                tried_letters.append(letter_try)
             form = LetterForm()
             print(mystery_word, ",", found_letters, ",", hidden_word)
             if letter_try in mystery_word:
@@ -93,14 +96,14 @@ def pendu_view(request):
                 hidden_word = hide_word(mystery_word, found_letters)
                 cache.set_many({'mystery_word': mystery_word,
                                 'hidden_word': hidden_word, 'tries': tries,
-                                'found_letters': found_letters})
+                                'found_letters': found_letters, 'tried_letters': tried_letters})
 
             else:
                 tries -= 1
                 result = f"Perdu. Réessayez! Il vous reste {tries} tentatives"
                 cache.set_many({'mystery_word': mystery_word,
                                 'hidden_word': hidden_word, 'tries': tries,
-                                'found_letters': found_letters})
+                                'found_letters': found_letters, 'tried_letters': tried_letters})
 
             if hidden_word == mystery_word:
                 result = f"Vous avez gagné, le mot était {hidden_word}"

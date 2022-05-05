@@ -5,6 +5,7 @@
     <p>Salut {{ request.user }}</p>
     <p>Le mot à trouver est {{ hidden_word }}</p>
     <p>Nombre de tentatives: {{ tries }}</p>
+    <p>Lettres essayées: {{ tried_letters }}</p>
     <p>{{ result }}</p>
     {% if not restart %}
     <form action="pendu" method="POST">
