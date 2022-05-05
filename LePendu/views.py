@@ -1,7 +1,6 @@
 import random
 
 from django.contrib.auth import authenticate, logout, login
-from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -72,6 +71,11 @@ def pendu_view(request):
         if len(mystery_word) > 7:
             tries += 2
         letter_form = LetterForm()
+        if request.user.is_authenticated:
+            cache.set_many({'played_games': request.user.played_games,
+                            'won_games': request.user.won_games, 'rank': request.user.rank,
+                            'streak': request.user.streak})
+
         return render(request,
                       'pendu.html', context={'mystery_word': mystery_word,
                                              'hidden_word': hidden_word, 'tries': tries,
@@ -84,6 +88,12 @@ def pendu_view(request):
         hidden_word = cache.get("hidden_word")
         tries = cache.get("tries")
         tried_letters = cache.get("tried_letters")
+        if request.user.is_authenticated:
+            played_games = cache.get("played_games")
+            won_games = cache.get("won_games")
+            rank = cache.get("rank")
+            streak = cache.get("streak")
+
         if form.is_valid():
             letter_try = request.POST.get("letter_try").upper()
             if letter_try not in tried_letters:
@@ -108,9 +118,19 @@ def pendu_view(request):
             if hidden_word == mystery_word:
                 result = f"Vous avez gagné, le mot était {hidden_word}"
                 restart = True
+                if request.user.is_authenticated:
+                    request.user.played_games += 1
+                    request.user.won_games += 1
+                    request.user.streak += 1
+                    request.user.save()
+
             elif tries == 0:
                 result = f"Vous avez été pendu, désolé. Le mot à trouver était {mystery_word}"
                 restart = True
+                if request.user.is_authenticated:
+                    request.user.played_games += 1
+                    request.user.streak = 0
+                    request.user.save()
 
             return render(request,
                           'pendu.html', locals())

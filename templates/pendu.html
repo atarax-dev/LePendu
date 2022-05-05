@@ -2,7 +2,12 @@
 {% block title %}Le Pendu{% endblock %}
 {% block content %}
 <div class="feed">
+    {% if request.user.is_authenticated %}
     <p>Salut {{ request.user }}</p>
+    <p>Parties jouées: {{ request.user.played_games }}</p>
+    <p>Parties gagnées: {{ request.user.won_games }}</p>
+    <p>Série de parties gagnées: {{ request.user.streak }}</p>
+    {% endif %}
     <p>Le mot à trouver est {{ hidden_word }}</p>
     <p>Nombre de tentatives: {{ tries }}</p>
     <p>Lettres essayées: {{ tried_letters }}</p>
