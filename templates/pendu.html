@@ -12,6 +12,9 @@
     <p>Nombre de tentatives: {{ tries }}</p>
     <p>Lettres essayées: {{ tried_letters }}</p>
     <p>{{ result }}</p>
+    {% if badge %}
+    <p>Vous venez d'obtenir le badge {{ badge.title }}</p>
+    {% endif %}
     {% if not restart %}
     <form action="pendu" method="POST">
         {% csrf_token %}

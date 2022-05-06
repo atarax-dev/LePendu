@@ -13,7 +13,7 @@ class User(AbstractUser):
         return f"{self.username}"
 
 
-class Badges(models.Model):
+class Badge(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
     owner = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
