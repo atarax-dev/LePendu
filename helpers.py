@@ -41,7 +41,7 @@ def check_for_special_badges(user):
             won_badge.save()
             return won_badge
 
-    elif user.win_rate >= 70 and user.played_games >= 10:
+    if user.win_rate >= 70 and user.played_games >= 10:
         try:
             Badge.objects.get(title="Voltaire",
                               description="Vous avez obtenu un taux de victoires supérieur "
@@ -55,7 +55,7 @@ def check_for_special_badges(user):
             won_badge.save()
             return won_badge
 
-    elif user.streak >= 10:
+    if user.streak >= 10:
         try:
             Badge.objects.get(title="Imbattable",
                               description="Vous avez réussi une série de 10 victoires!",
