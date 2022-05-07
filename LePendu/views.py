@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from LePendu.forms import LetterForm
-from helpers import hide_word, check_for_badges
+from helpers import hide_word, check_for_badges, check_for_special_badges
 from user.models import User
 
 
@@ -124,6 +124,7 @@ def pendu_view(request):
                     request.user.streak += 1
                     request.user.save()
                     badge = check_for_badges(request.user)
+                    special_badge = check_for_special_badges(request.user)
 
             elif tries == 0:
                 result = f"Vous avez été pendu, désolé. Le mot à trouver était {mystery_word}"
@@ -133,9 +134,21 @@ def pendu_view(request):
                     request.user.streak = 0
                     request.user.save()
                     badge = check_for_badges(request.user)
+                    special_badge = check_for_special_badges(request.user)
 
             return render(request,
                           'pendu.html', locals())
         else:
             return render(request,
                           'pendu.html', locals())
+
+
+def ranking_view(request):
+    players = User.objects.all()
+    sorted_players = sorted(players, key=lambda player: player.win_rate, reverse=True)
+    return render(request,
+                  'ranking.html', locals())
+
+
+def profile_view(request):
+    pass

@@ -7,6 +7,7 @@
     <p>Parties jouées: {{ request.user.played_games }}</p>
     <p>Parties gagnées: {{ request.user.won_games }}</p>
     <p>Série de parties gagnées: {{ request.user.streak }}</p>
+    <p>Taux de victoires: {{ request.user.win_rate }}%</p>
     {% endif %}
     <p>Le mot à trouver est {{ hidden_word }}</p>
     <p>Nombre de tentatives: {{ tries }}</p>
@@ -14,6 +15,9 @@
     <p>{{ result }}</p>
     {% if badge %}
     <p>Vous venez d'obtenir le badge {{ badge.title }}</p>
+    {% endif %}
+    {% if special_badge %}
+    <p>Vous venez d'obtenir le badge spécial {{ special_badge.title }}</p>
     {% endif %}
     {% if not restart %}
     <form action="pendu" method="POST">
