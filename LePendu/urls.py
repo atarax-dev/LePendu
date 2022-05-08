@@ -19,7 +19,8 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from LePendu.views import home_view, create_user, pendu_view, log_user, logout_user, ranking_view
+from LePendu.views import home_view, create_user, pendu_view, log_user, logout_user, ranking_view, \
+    login_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +31,7 @@ urlpatterns = [
     path('log_user', log_user, name='log_user'),
     path('logout_user', logout_user, name='logout_user'),
     path('ranking', ranking_view, name='ranking'),
+    path('login', login_view, name='login'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

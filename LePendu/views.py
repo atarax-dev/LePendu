@@ -14,6 +14,10 @@ def home_view(request):
     return render(request, 'index.html')
 
 
+def login_view(request):
+    return render(request, 'login.html')
+
+
 def create_user(request):
     username = request.POST.get("register_name")
     pass1 = request.POST.get("pass1")
