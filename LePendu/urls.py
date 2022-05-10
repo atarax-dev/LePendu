@@ -19,8 +19,8 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from LePendu.views import home_view, create_user, pendu_view, log_user, logout_user, ranking_view, \
-    login_view, profile_view
+from LePendu.views import home_view, create_user, pendu_view, log_user, logout_user,\
+    ranking_view, login_view, profile_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),

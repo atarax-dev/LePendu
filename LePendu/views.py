@@ -1,12 +1,10 @@
-import random
-
 from django.contrib.auth import authenticate, logout, login
 from django.core.cache import cache
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from LePendu.forms import LetterForm
-from game.helpers import hide_word, check_for_badges, check_for_special_badges
+from game.helpers import check_for_badges, check_for_special_badges
 from game.models import Game
 from user.models import User
 

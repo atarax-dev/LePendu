@@ -2,8 +2,6 @@ from random import choice
 
 from django.db import models
 
-from game.helpers import check_for_badges, check_for_special_badges
-
 
 class Word(models.Model):
     word = models.CharField(max_length=12)
