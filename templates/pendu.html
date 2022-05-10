@@ -3,15 +3,13 @@
 {% block content %}
 <div class="feed">
     {% if request.user.is_authenticated %}
-    <p>Salut {{ request.user }}</p>
-    <p>Parties jouées: {{ request.user.played_games }}</p>
-    <p>Parties gagnées: {{ request.user.won_games }}</p>
-    <p>Série de parties gagnées: {{ request.user.streak }}</p>
-    <p>Taux de victoires: {{ request.user.win_rate }}%</p>
+    <p>Bonjour {{ request.user }}</p>
     {% endif %}
-    <p>Le mot à trouver est {{ hidden_word }}</p>
-    <p>Nombre de tentatives: {{ tries }}</p>
-    <p>Lettres essayées: {{ tried_letters }}</p>
+    {% if not restart %}
+    <p>Le mot à trouver est {{ game.hidden_word }}</p>
+    <p>Nombre de tentatives: {{ game.tries }}</p>
+    <p>Lettres essayées: {{ game.tried_letters }}</p>
+    {% endif %}
     <p>{{ result }}</p>
     {% if badge %}
     <p>Vous venez d'obtenir le badge {{ badge.title }}</p>

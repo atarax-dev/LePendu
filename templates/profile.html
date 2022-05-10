@@ -1,0 +1,13 @@
+{% extends "base_template.html" %}
+{% block title %}Le Pendu{% endblock %}
+{% block content %}
+<div class="feed">
+    {% if request.user.is_authenticated %}
+    <p>Votre nom d'utilisateur: {{ request.user }}</p>
+    <p>Parties jouées: {{ request.user.played_games }}</p>
+    <p>Parties gagnées: {{ request.user.won_games }}</p>
+    <p>Série de parties gagnées: {{ request.user.streak }}</p>
+    <p>Taux de victoires: {{ request.user.win_rate }}%</p>
+    {% endif %}
+</div>
+{% endblock %}

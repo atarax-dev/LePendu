@@ -1,5 +1,5 @@
 import random
-from helpers import hide_word
+from game.helpers import hide_word
 
 words = ["corbeau", "amoral", "admission", "humeur", "cadeau", "complice", "bouche", "ballet",
          "pictural", "infini", "messie", "regarder", "tragique", "bastion", "articulation",

@@ -6,7 +6,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from LePendu.forms import LetterForm
-from helpers import hide_word, check_for_badges, check_for_special_badges
+from game.helpers import hide_word, check_for_badges, check_for_special_badges
+from game.models import Game
 from user.models import User
 
 
@@ -59,84 +60,33 @@ def logout_user(request):
 
 def pendu_view(request):
     if request.method == "GET":
-        words = ["corbeau", "amoral", "admission", "humeur", "cadeau", "complice", "bouche",
-                 "ballet",
-                 "pictural", "infini", "messie", "regarder", "tragique", "bastion", "articulation",
-                 "sabotage", "philosophie", "condition", "oiseau", "compagnie", "pratique"]
-
-        mystery_word = random.choice(words).upper()
-        found_letters = []
-        tried_letters = []
-        hidden_word = hide_word(mystery_word, found_letters)
-        tries = 7
-        cache.set_many({'mystery_word': mystery_word,
-                        'hidden_word': hidden_word, 'tries': tries,
-                        'found_letters': found_letters, 'tried_letters': tried_letters})
-        if len(mystery_word) > 7:
-            tries += 2
-        letter_form = LetterForm()
-        if request.user.is_authenticated:
-            cache.set_many({'played_games': request.user.played_games,
-                            'won_games': request.user.won_games, 'rank': request.user.rank,
-                            'streak': request.user.streak})
+        game = Game(request.user)
+        game.hide_word()
+        cache.set("game", game)
+        form = LetterForm()
 
         return render(request,
-                      'pendu.html', context={'mystery_word': mystery_word,
-                                             'hidden_word': hidden_word, 'tries': tries,
-                                             'found_letters': found_letters, 'form': letter_form,
-                                             'tried_letters': tried_letters})
+                      'pendu.html', locals())
     elif request.method == "POST":
         form = LetterForm(request.POST)
-        mystery_word = cache.get("mystery_word")
-        found_letters = cache.get("found_letters")
-        hidden_word = cache.get("hidden_word")
-        tries = cache.get("tries")
-        tried_letters = cache.get("tried_letters")
-        if request.user.is_authenticated:
-            played_games = cache.get("played_games")
-            won_games = cache.get("won_games")
-            rank = cache.get("rank")
-            streak = cache.get("streak")
+        game = cache.get("game")
 
         if form.is_valid():
             letter_try = request.POST.get("letter_try").upper()
-            if letter_try not in tried_letters:
-                tried_letters.append(letter_try)
+            result = game.run_game(letter_try)
             form = LetterForm()
-            print(mystery_word, ",", found_letters, ",", hidden_word)
-            if letter_try in mystery_word:
-                result = "Gagné"
-                found_letters.append(letter_try)
-                hidden_word = hide_word(mystery_word, found_letters)
-                cache.set_many({'mystery_word': mystery_word,
-                                'hidden_word': hidden_word, 'tries': tries,
-                                'found_letters': found_letters, 'tried_letters': tried_letters})
+            cache.set("game", game)
+            print(game.mystery_word, ",", game.found_letters, ",", game.hidden_word)
 
-            else:
-                tries -= 1
-                result = f"Perdu. Réessayez! Il vous reste {tries} tentatives"
-                cache.set_many({'mystery_word': mystery_word,
-                                'hidden_word': hidden_word, 'tries': tries,
-                                'found_letters': found_letters, 'tried_letters': tried_letters})
-
-            if hidden_word == mystery_word:
-                result = f"Vous avez gagné, le mot était {hidden_word}"
+            if game.hidden_word == game.mystery_word:
                 restart = True
                 if request.user.is_authenticated:
-                    request.user.played_games += 1
-                    request.user.won_games += 1
-                    request.user.streak += 1
-                    request.user.save()
                     badge = check_for_badges(request.user)
                     special_badge = check_for_special_badges(request.user)
 
-            elif tries == 0:
-                result = f"Vous avez été pendu, désolé. Le mot à trouver était {mystery_word}"
+            elif game.tries == 0:
                 restart = True
                 if request.user.is_authenticated:
-                    request.user.played_games += 1
-                    request.user.streak = 0
-                    request.user.save()
                     badge = check_for_badges(request.user)
                     special_badge = check_for_special_badges(request.user)
 
@@ -155,4 +105,5 @@ def ranking_view(request):
 
 
 def profile_view(request):
-    pass
+    return render(request,
+                  'profile.html')

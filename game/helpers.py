@@ -1,13 +1,6 @@
 from user.models import Badge
 
 
-def hide_word(word_to_hide, found_letters):
-    for letter in word_to_hide:
-        if letter not in found_letters:
-            word_to_hide = word_to_hide.replace(letter, "_")
-    return word_to_hide
-
-
 def check_for_badges(user):
     badges = {5: ("Initié", "Vous avez gagné 5 parties"),
               10: ("Joueur", "Vous avez gagné 10 parties"),
@@ -66,3 +59,10 @@ def check_for_special_badges(user):
                               owner=user)
             won_badge.save()
             return won_badge
+
+
+def hide_word(word_to_hide, found_letters):
+    for letter in word_to_hide:
+        if letter not in found_letters:
+            word_to_hide = word_to_hide.replace(letter, "_")
+    return word_to_hide
