@@ -22,6 +22,7 @@ def check_for_badges(user):
 
 
 def check_for_special_badges(user):
+    special_badges = []
     if user.played_games == 50:
         try:
             Badge.objects.get(title="Tryharder",
@@ -32,7 +33,7 @@ def check_for_special_badges(user):
                               description="Vous avez joué plus de 50 parties",
                               owner=user)
             won_badge.save()
-            return won_badge
+            special_badges.append(won_badge)
 
     if user.win_rate >= 70 and user.played_games >= 10:
         try:
@@ -46,7 +47,7 @@ def check_for_special_badges(user):
                                           "ou égal à 70% après 10 parties",
                               owner=user)
             won_badge.save()
-            return won_badge
+            special_badges.append(won_badge)
 
     if user.streak >= 10:
         try:
@@ -58,4 +59,6 @@ def check_for_special_badges(user):
                               description="Vous avez réussi une série de 10 victoires!",
                               owner=user)
             won_badge.save()
-            return won_badge
+            special_badges.append(won_badge)
+
+    return special_badges
