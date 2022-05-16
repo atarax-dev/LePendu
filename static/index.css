@@ -17,6 +17,13 @@ header{
     color: black;
     box-shadow: 0 0 10px #4d4f4f;
 }
+h1{
+    font-size: 60px;
+    margin: 0;
+}
+h2{
+    text-align: center;
+}
 .contain-button{
     height: 75%;
     display: flex;
@@ -24,6 +31,10 @@ header{
     justify-content: center;
     align-items: center;
 }
+
+/*INDEX*/
+
+
 .index-button{
     display: block;
     background-color: rgb(187, 187, 187);
@@ -47,10 +58,44 @@ header{
 #play{
     font-size: 50px;
 }
-h1{
-    font-size: 60px;
-    margin: 0;
+
+/*LOGIN*/
+
+
+.main{
+    display: flex;
+    height: 75%;
+    justify-content: center;
+    align-items: center;
 }
+.block-log{
+    width: 35%;
+    height: 80%;
+    margin: 3%;
+    border: solid 1px black;
+    border-radius: 15px;
+}
+.block-log form{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 70%;
+    height: 80%;
+    margin: auto;
+}
+.log-input{
+    margin-top: 20px;
+}
+.log-submit-left{
+    margin-top: 150px;
+}
+.log-submit-right{
+    margin-top: 106px;
+}
+
+
+
+
 a{
   text-decoration:none;
   color:#444444;

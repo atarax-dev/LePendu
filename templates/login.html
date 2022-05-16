@@ -19,9 +19,9 @@
             <h2>Se connecter</h2>
             <form action="/log_user" method="POST">
                 {% csrf_token %}
-                <input type="text" name="username" placeholder="Nom d'utilisateur">
-                <input type="password" name="password" placeholder="Mot de passe">
-                <input type="submit" value="Se connecter">
+                <input class="log-input" type="text" name="username" placeholder="Nom d'utilisateur">
+                <input class="log-input" type="password" name="password" placeholder="Mot de passe">
+                <input class="log-input log-submit-left" type="submit" value="Se connecter">
             </form>
 
         </div>
@@ -29,10 +29,10 @@
             <h2>S'inscrire</h2>
             <form action="/create_user" method="POST">
                 {% csrf_token %}
-                <input type="text" name="register_name" placeholder="Nom d'utilisateur">
-                <input type="password" name="pass1" placeholder="Mot de passe">
-                <input type="password" name="pass2" placeholder="Confirmez le mot de passe">
-                <input type="submit" value="S'inscrire">
+                <input class="log-input" type="text" name="register_name" placeholder="Nom d'utilisateur">
+                <input class="log-input" type="password" name="pass1" placeholder="Mot de passe">
+                <input class="log-input" type="password" name="pass2" placeholder="Confirmez le mot de passe">
+                <input class="log-input log-submit-right" type="submit" value="S'inscrire">
             </form>
         </div>
     </div>
