@@ -14,8 +14,10 @@
     {% if badge %}
     <p>Vous venez d'obtenir le badge {{ badge.title }}</p>
     {% endif %}
-    {% if special_badge %}
+    {% if special_badges %}
+    {% for special_badge in special_badges %}
     <p>Vous venez d'obtenir le badge spécial {{ special_badge.title }}</p>
+    {% endfor %}
     {% endif %}
     {% if not restart %}
     <form action="pendu" method="POST">

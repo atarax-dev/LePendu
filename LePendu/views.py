@@ -80,13 +80,13 @@ def pendu_view(request):
                 restart = True
                 if request.user.is_authenticated:
                     badge = check_for_badges(request.user)
-                    special_badge = check_for_special_badges(request.user)
+                    special_badges = check_for_special_badges(request.user)
 
             elif game.tries == 0:
                 restart = True
                 if request.user.is_authenticated:
                     badge = check_for_badges(request.user)
-                    special_badge = check_for_special_badges(request.user)
+                    special_badges = check_for_special_badges(request.user)
 
             return render(request,
                           'pendu.html', locals())
