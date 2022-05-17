@@ -21,7 +21,9 @@
                 {% csrf_token %}
                 <input class="log-input" type="text" name="username" placeholder="Nom d'utilisateur">
                 <input class="log-input" type="password" name="password" placeholder="Mot de passe">
-                <input class="log-input log-submit-left" type="submit" value="Se connecter">
+                <div class="log-submit">
+                    <input class="log-input log-submit-btn" type="submit" value="Se connecter">
+                </div>
             </form>
 
         </div>
@@ -32,7 +34,9 @@
                 <input class="log-input" type="text" name="register_name" placeholder="Nom d'utilisateur">
                 <input class="log-input" type="password" name="pass1" placeholder="Mot de passe">
                 <input class="log-input" type="password" name="pass2" placeholder="Confirmez le mot de passe">
-                <input class="log-input log-submit-right" type="submit" value="S'inscrire">
+                <div class="log-submit">
+                    <input class="log-input log-submit-btn" type="submit" value="S'inscrire">
+                </div>
             </form>
         </div>
     </div>

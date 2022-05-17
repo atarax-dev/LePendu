@@ -86,12 +86,16 @@ h2{
 .log-input{
     margin-top: 20px;
 }
-.log-submit-left{
-    margin-top: 150px;
+.log-submit{
+    position: absolute;
+    bottom: 30px;
 }
-.log-submit-right{
-    margin-top: 106px;
+.log-submit-btn{
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
 }
+
 
 
 
