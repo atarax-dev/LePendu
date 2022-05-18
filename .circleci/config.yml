@@ -1,0 +1,42 @@
+version: 2.1
+
+
+orbs:
+  python: circleci/python@1.5.0
+
+
+jobs:
+  tests:
+    docker:
+      - image: cimg/python:3.10.2
+
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Run tests
+          command: python manage.py test -v 2
+      - run:
+          name: Run linting
+          command: flake8
+
+
+  heroku-deploy:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Build and push Docker image to Heroku
+          command: |
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a lechomdu web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a lechomdu web
+workflows:
+  test-and-deploy:
+    jobs:
+      - tests
+      - heroku-deploy:
+          requires:
+              - tests

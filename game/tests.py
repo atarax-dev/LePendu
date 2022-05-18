@@ -30,9 +30,11 @@ class TestView(TestCase):
         response = self.client.get("/pendu")
         mystery_word = response.context["game"].mystery_word
         unique_letters = set(mystery_word)
-        self.assertContains(response, "<p>Bonjour Pampa</p>")
+        self.assertContains(response, '<p class="hello">Bonjour Pampa</p>')
         for letter in unique_letters:
             game_response = self.client.post('/pendu', {'letter_try': letter})
-        self.assertContains(game_response, f"<p>Vous avez gagné, le mot était {mystery_word}</p>")
+        self.assertContains(game_response,
+                            f'<p class="game-text">Vous avez gagné, '
+                            f'le mot était {mystery_word}</p>')
         self.assertContains(game_response, "Vous venez d'obtenir le badge Confirmé")
         self.assertContains(game_response, "<p>Vous venez d'obtenir le badge spécial Voltaire</p>")

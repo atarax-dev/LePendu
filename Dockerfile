@@ -2,7 +2,7 @@
 FROM python:3.10-alpine
 
 # set work directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 
 # set environment variables
@@ -19,13 +19,16 @@ RUN pip install --upgrade pip
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
-# copy entrypoint.sh
-COPY ./entrypoint.sh .
-RUN sed -i 's/\r$//g' /usr/src/app/entrypoint.sh
-RUN chmod +x /usr/src/app/entrypoint.sh
-
 # copy project
 COPY . .
 
-# run entrypoint.sh
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+# collect static files
+RUN python manage.py collectstatic --noinput
+
+# add and run as non-root user
+RUN adduser -D myuser
+RUN chown -R myuser:myuser /app/
+USER myuser
+
+# run gunicorn
+CMD gunicorn LePendu.wsgi:application --bind 0.0.0.0:$PORT
