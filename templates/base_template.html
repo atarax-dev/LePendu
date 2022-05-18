@@ -8,40 +8,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="/static/normalize.css">
-  <link rel="stylesheet" href="/static/index.css">  
+  <link rel="stylesheet" href="/static/index.css">
 </head>
 <header>
-  <nav class=navbar>
-    <div class="site_title">
-      <h1>Le Pendu</h1>
-    </div>
-    <div>
-      <ul class="navet">
-        <li>
-          <a href="/pendu">Pendu</a>
-        </li>
-        {% if request.user.is_authenticated %}
-        <li>
-          <a href="/ranking">Classement</a>
-        </li>
-        <li>
-          <a href="/profile">Profil</a>
-        </li>
-        <li>
-          <a href="/logout_user">Se déconnecter</a>
-        </li>
-        {% endif %}
-        {% if not request.user.is_authenticated %}
-        <li>
-          <a href="/ranking">Classement</a>
-        </li>
-        <li>
-          <a href="/login">Se connecter/S'inscrire</a>
-        </li>
-        {% endif %}
-      </ul>
-    </div>
-  </nav>
+  <div class="header-play">
+    <h1>Le Pendu</h1>
+    <nav>
+        <ul>
+          <li class="nav-link">
+            <a href="/pendu">Pendu</a>
+          </li>
+          {% if request.user.is_authenticated %}
+          <li class="nav-link">
+            <a href="/ranking">Classement</a>
+          </li>
+          <li class="nav-link">
+            <a href="/profile">Profil</a>
+          </li>
+          <li class="nav-link">
+            <a href="/logout_user">Se déconnecter</a>
+          </li>
+          {% endif %}
+          {% if not request.user.is_authenticated %}
+          <li class="nav-link">
+            <a href="/ranking">Classement</a>
+          </li>
+          <li class="nav-link">
+            <a href="/login">Se connecter/S'inscrire</a>
+          </li>
+          {% endif %}
+        </ul>
+    </nav>
+  </div>
 </header>
 
 <body>

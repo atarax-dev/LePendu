@@ -3,14 +3,16 @@
 {% block content %}
 <div class="feed">
     {% if request.user.is_authenticated %}
-    <p>Bonjour {{ request.user }}</p>
+    <p class="hello">Bonjour {{ request.user }}</p>
     {% endif %}
     {% if not restart %}
-    <p>Le mot à trouver est {{ game.hidden_word }}</p>
-    <p>Nombre de tentatives: {{ game.tries }}</p>
-    <p>Lettres essayées: {{ game.tried_letters }}</p>
+    <div class="main-play">
+    <div class="contain-game-text">
+    <p class="game-text">Le mot à trouver est {{ game.hidden_word }}</p>
+    <p class="game-text">Nombre de tentatives: {{ game.tries }}</p>
+    <p class="game-text">Lettres essayées: {{ game.tried_letters }}</p>
     {% endif %}
-    <p>{{ result }}</p>
+    <p class="game-text">{{ result }}</p>
     {% if badge %}
     <p>Vous venez d'obtenir le badge {{ badge.title }}</p>
     {% endif %}
@@ -20,16 +22,18 @@
     {% endfor %}
     {% endif %}
     {% if not restart %}
-    <form action="pendu" method="POST">
+    </div>
+    <img class="pendu-picture"
+        src='/static/pendu_images/pendu{{ game.tries }}.jpg'
+        alt="image du pendu">
+</div>
+    <form class="game-form" action="pendu" method="POST">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Valider">
     </form>
     {% endif %}
     {% if game.mystery_word != game.hidden_word %}
-    <img class="pendu-picture"
-     src='/static/pendu_images/pendu{{ game.tries }}.jpg'
-     alt="image du pendu">
     {% endif %}
     {% if restart %}
         <a href="pendu"><button type="submit">Recommencer</button></a>
