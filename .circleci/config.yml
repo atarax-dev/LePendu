@@ -20,9 +20,6 @@ jobs:
             sudo apt-get update
             sudo apt-get install postgresql-client
             python manage.py test -v 2
-      - run:
-          name: Run linting
-          command: flake8
 
 
   heroku-deploy:
