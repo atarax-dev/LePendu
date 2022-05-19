@@ -11,16 +11,13 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 import environ
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
+env = environ.Env()
 
 # Set the project base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Take environment variables from .env file
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+environ.Env.read_env()
 
 # False if not in os.environ because of casting above
 DEBUG = env('DEBUG')
