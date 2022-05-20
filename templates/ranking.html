@@ -2,11 +2,7 @@
 {% block title %}Classement des joueurs{% endblock %}
 {% block content %}
 <div class="feed">
-    <p>Joueurs en base de données (liste sans tri)</p>
-    {% for player in players %}
-    <p>- {{ player.rank }} {{ player }} : {{ player.win_rate }}% de victoires</p>
-    {% endfor %}
-    <p>Joueurs classés</p>
+    <p>Classement</p>
     {% for ranked_player in sorted_players %}
     <p>- {{ ranked_player.rank }} {{ ranked_player }} : {{ ranked_player.win_rate }}% de victoires</p>
     {% endfor %}

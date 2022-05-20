@@ -71,5 +71,9 @@ class Game:
                     self.player.save()
                 return result
             else:
-                result = f"Perdu. Réessayez! Il vous reste {self.tries} tentatives"
-                return result
+                if self.tries > 1:
+                    result = f"Perdu. Réessayez! Il vous reste {self.tries} tentatives"
+                    return result
+                else:
+                    result = f"Perdu. Réessayez! Il vous reste {self.tries} tentative"
+                    return result

@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from LePendu.forms import LetterForm
 from game.helpers import check_for_badges, check_for_special_badges
 from game.models import Game
-from user.models import User
+from user.models import User, Badge
 
 
 def home_view(request):
@@ -103,5 +103,6 @@ def ranking_view(request):
 
 
 def profile_view(request):
+    badges = Badge.objects.filter(owner=request.user)
     return render(request,
-                  'profile.html')
+                  'profile.html', locals())

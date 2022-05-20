@@ -5,38 +5,39 @@
     {% if request.user.is_authenticated %}
     <p class="hello">Bonjour {{ request.user }}</p>
     {% endif %}
-    {% if not restart %}
     <div class="main-play">
     <div class="contain-game-text">
+    {% if not restart %}
     <p class="game-text">Le mot à trouver est {{ game.hidden_word }}</p>
-    <p class="game-text">Nombre de tentatives: {{ game.tries }}</p>
+    <p class="game-text">Tentatives restantes: {{ game.tries }}</p>
     <p class="game-text">Lettres essayées: {{ game.tried_letters }}</p>
     {% endif %}
     <p class="game-text">{{ result }}</p>
     {% if badge %}
-    <p>Vous venez d'obtenir le badge {{ badge.title }}</p>
+    <p class="game-text">Vous venez d'obtenir le badge {{ badge.title }}</p>
     {% endif %}
     {% if special_badges %}
     {% for special_badge in special_badges %}
-    <p>Vous venez d'obtenir le badge spécial {{ special_badge.title }}</p>
+    <p class="game-text">Vous venez d'obtenir le badge spécial {{ special_badge.title }}</p>
     {% endfor %}
     {% endif %}
-    {% if not restart %}
+
     </div>
     <img class="pendu-picture"
         src='/static/pendu_images/pendu{{ game.tries }}.jpg'
         alt="image du pendu">
 </div>
+    {% if not restart %}
     <form class="game-form" action="pendu" method="POST">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Valider">
     </form>
     {% endif %}
-    {% if game.mystery_word != game.hidden_word %}
-    {% endif %}
     {% if restart %}
-        <a href="pendu"><button type="submit">Recommencer</button></a>
+        <div class="game-text">
+            <a href="pendu"><button type="submit">Recommencer</button></a>
+        </div>
     {% endif %}
 
 </div>

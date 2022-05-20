@@ -8,6 +8,12 @@
     <p>Parties gagnées: {{ request.user.won_games }}</p>
     <p>Série de parties gagnées: {{ request.user.streak }}</p>
     <p>Taux de victoires: {{ request.user.win_rate }}%</p>
+    {% if badges %}
+    <p>Vos badges gagnés:</p>
+    {% for badge in badges %}
+    <p>{{ badge.title }} : {{ badge.description }}</p>
+    {% endfor %}
+    {% endif %}
     {% endif %}
 </div>
 {% endblock %}
