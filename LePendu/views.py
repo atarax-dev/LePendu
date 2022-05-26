@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.auth import authenticate, logout, login
 from django.core.cache import cache
 from django.http import HttpResponse
@@ -58,22 +60,24 @@ def logout_user(request):
 
 def pendu_view(request):
     if request.method == "GET":
+        user_game = uuid.uuid4().hex
         game = Game(request.user)
         game.hide_word()
-        cache.set("game", game)
+        cache.set(f"game{user_game}", game)
         form = LetterForm()
 
         return render(request,
                       'pendu.html', locals())
     elif request.method == "POST":
+        user_game = request.POST.get("user_game_id")
         form = LetterForm(request.POST)
-        game = cache.get("game")
+        game = cache.get(f"game{user_game}")
 
         if form.is_valid():
             letter_try = request.POST.get("letter_try").upper()
             result = game.run_game(letter_try)
             form = LetterForm()
-            cache.set("game", game)
+            cache.set(f"game{user_game}", game)
             print(game.mystery_word, ",", game.found_letters, ",", game.hidden_word)
 
             if game.hidden_word == game.mystery_word:

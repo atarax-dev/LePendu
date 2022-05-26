@@ -31,6 +31,7 @@
     <form class="game-form" action="pendu" method="POST">
         {% csrf_token %}
         {{ form }}
+        <input name="user_game_id" type="hidden" value="{{ user_game }}">
         <input type="submit" value="Valider">
     </form>
     {% endif %}
