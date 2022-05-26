@@ -55,6 +55,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'LePendu.urls'
 
+CSRF_TRUSTED_ORIGINS = ['https://lechomdu.herokuapp.com']
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
