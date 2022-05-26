@@ -15,7 +15,7 @@
 
 <body>
     <div class="main">
-        <div class="block-log">
+        <div class="block-log block-log-left">
             <h2>Se connecter</h2>
             <form action="/log_user" method="POST">
                 {% csrf_token %}
@@ -27,7 +27,7 @@
             </form>
 
         </div>
-        <div class="block-log">
+        <div class="block-log block-log-right">
             <h2>S'inscrire</h2>
             <form action="/create_user" method="POST">
                 {% csrf_token %}

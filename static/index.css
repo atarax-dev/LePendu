@@ -5,7 +5,7 @@
 body{
     font-family: 'Courgette', cursive;
     box-sizing: border-box;
-    background-color: #D7D7D7;
+    background-color: #7dad71;
     height: 100vh;
 }
 header{
@@ -13,7 +13,7 @@ header{
     justify-content: center;
     align-items: center;
     height: 20%;
-    background-color: rgb(135, 135, 135);
+    background-color: rgb(187, 187, 187);
     color: black;
     box-shadow: 0 0 10px #4d4f4f;
 }
@@ -73,30 +73,52 @@ a{
     align-items: center;
 }
 .block-log{
-    width: 35%;
+    width: 30%;
     height: 80%;
     margin: 3%;
-    border: solid 1px black;
+    background-color: rgb(187, 187, 187);
     border-radius: 15px;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
+.block-log-left:hover{
+    transform: scale(1.05);
+}
+.block-log-left:hover + .block-log-right{
+    transform: scale(0.95);
+    filter: blur(2px);
+}
+.block-log-right:hover{
+    transform: scale(1.05);
+}
+.block-log-right:hover + .block-log-left{
+    transform: scale(0.95);
+    filter: blur(2px);
+}
+
 .block-log form{
     display: flex;
     flex-direction: column;
     position: relative;
-    width: 70%;
+    width: 60%;
     height: 80%;
     margin: auto;
 }
 .log-input{
     margin-top: 20px;
+    border-radius: 7px;
+    border: hidden;
 }
 .log-submit{
     position: absolute;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
     bottom: 30px;
 }
 .log-submit-btn{
-    margin-left: auto;
-    margin-right: auto;
     width: 200px;
 }
 
@@ -124,7 +146,7 @@ a{
 }
 .main-play{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin: 0 20px;
 }
 .hello{
@@ -136,10 +158,12 @@ a{
     flex-direction: column;
     justify-content: center;
     vertical-align: middle;
-    width: 40%;
-    height: 200px;
-    border: solid 1px black;
-    margin-bottom: 20px;
+    width: 300px;
+    height: 300px;
+    background-color: white;
+    border-radius: 20px;
+    margin: 20px;
+    box-shadow: rgba(0, 0, 0, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 }
 .game-text{
     text-align: center;
@@ -147,13 +171,19 @@ a{
 .game-form{
     text-align: center;
 }
+.game-form label{
+    font-size: 25px;
+}
 #id_letter_try{
     width: 30%;
 }
 .pendu-picture{
-    width: 30%;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     text-align: center;
+    margin: 20px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 }
 
 @media screen and (max-width: 767.9px){
