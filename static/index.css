@@ -80,20 +80,8 @@ a{
     border-radius: 15px;
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
-.block-log-left:hover{
-    transform: scale(1.05);
-}
-.block-log-left:hover + .block-log-right{
-    transform: scale(0.95);
-    filter: blur(2px);
-}
-.block-log-right:hover{
-    transform: scale(1.05);
-}
-.block-log-right:hover + .block-log-left{
-    transform: scale(0.95);
-    filter: blur(2px);
-}
+
+
 
 .block-log form{
     display: flex;

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Page d'accueil</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
     <link rel="stylesheet" href="/static/normalize.css">
     <link rel="stylesheet" href="/static/index.css">  
 </head>
@@ -15,7 +16,7 @@
 
 <body>
     <div class="main">
-        <div class="block-log block-log-left">
+        <div class="block-log" id="block-log-left">
             <h2>Se connecter</h2>
             <form action="/log_user" method="POST">
                 {% csrf_token %}
@@ -27,7 +28,7 @@
             </form>
 
         </div>
-        <div class="block-log block-log-right">
+        <div class=block-log id=block-log-right>
             <h2>S'inscrire</h2>
             <form action="/create_user" method="POST">
                 {% csrf_token %}
@@ -40,5 +41,6 @@
             </form>
         </div>
     </div>
+    <script src="js/login.js"></script>
 </body>
 </html>
