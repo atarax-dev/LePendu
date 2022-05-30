@@ -39,6 +39,9 @@
         <div class="game-text">
             <a href="pendu"><button type="submit">Recommencer</button></a>
         </div>
+    {% if not request.user.is_authenticated %}
+    <p class="game-text">Inscrivez-vous pour conserver vos statistiques et obtenir des badges!</p>
+    {% endif %}
     {% endif %}
 
 </div>

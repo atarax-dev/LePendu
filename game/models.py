@@ -37,7 +37,7 @@ class Game:
         hidden_word = self.mystery_word
         for letter in hidden_word:
             if letter not in self.found_letters:
-                hidden_word = hidden_word.replace(letter, "_")
+                hidden_word = hidden_word.replace(letter, " _")
         self.hidden_word = hidden_word
 
     def run_game(self, letter_try):

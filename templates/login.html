@@ -26,6 +26,9 @@
                 {% csrf_token %}
                 <input class="log-input" type="text" name="username" placeholder="Nom d'utilisateur">
                 <input class="log-input" type="password" name="password" placeholder="Mot de passe">
+                {% if connect_warning %}
+                <p>{{ connect_warning }}</p>
+                {% endif %}
                 <div class="log-submit">
                     <input class="log-input log-submit-btn" type="submit" value="Se connecter">
                 </div>
@@ -39,6 +42,9 @@
                 <input class="log-input" type="text" name="register_name" placeholder="Nom d'utilisateur">
                 <input class="log-input" type="password" name="pass1" placeholder="Mot de passe">
                 <input class="log-input" type="password" name="pass2" placeholder="Confirmez le mot de passe">
+                {% if signup_warning %}
+                <p>{{ signup_warning }}</p>
+                {% endif %}
                 <div class="log-submit">
                     <input class="log-input log-submit-btn" type="submit" value="S'inscrire">
                 </div>

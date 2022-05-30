@@ -25,13 +25,16 @@ def create_user(request):
     pass2 = request.POST.get("pass2")
     if pass1 == pass2 and not username_exists(username):
         User.objects.create_user(username, '', pass1)
-        return HttpResponse(
-            "Votre compte a été créé. Connectez vous via l'écran de connexion")
+        user = authenticate(username=username, password=pass1)
+        login(request, user)
+        return redirect('pendu')
     elif pass1 != pass2:
-        return HttpResponse(
-            "La confirmation du mot de passe ne correspond pas. Réessayez")
+        signup_warning = "La confirmation du mot de passe ne correspond pas. Réessayez"
+        return render(request, 'login.html', locals())
+
     else:
-        return HttpResponse("Username déjà existant. Réessayez")
+        signup_warning = "Username déjà existant. Réessayez"
+        return render(request, 'login.html', locals())
 
 
 def username_exists(username):
@@ -50,7 +53,8 @@ def log_user(request):
         login(request, user)
         return redirect('pendu')
     else:
-        return HttpResponse("Compte invalide. Réessayez")
+        connect_warning = "Ce compte n'existe pas"
+        return render(request, 'login.html', locals())
 
 
 def logout_user(request):
