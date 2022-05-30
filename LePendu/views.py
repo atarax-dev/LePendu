@@ -53,7 +53,7 @@ def log_user(request):
         login(request, user)
         return redirect('pendu')
     else:
-        connect_warning = "Ce compte n'existe pas"
+        connect_warning = "Ce compte n'existe pas ou le mot de passe est invalide"
         return render(request, 'login.html', locals())
 
 
