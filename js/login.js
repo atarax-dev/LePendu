@@ -25,18 +25,18 @@ logRight.addEventListener('mouseout' , function mouseOutRight(){
     logLeft.style.filter = "blur(0)";
 })
 
-let btnLogLeft = document.getElementById("btn-log-left");
-let btnLogRight = document.getElementById("btn-log-right");
+let accountConnect = document.getElementById("account-connect");
+let accountCreate = document.getElementById("account-create");
 
-btnLogLeft.addEventListener('mouseover' , function btnCilckLeft (){
-    logLeft.style.transform = "scale(1)"
+accountConnect.addEventListener('click' , function accountClick() {
+    logLeft.style.display = "none";
+    logRight.style.display = "block";
+    logRight.style.transform = "scale(1)";
+    logRight.style.filter = "blur(0)"
 })
-btnLogLeft.addEventListener('mouseout' , function btnOutLeft (){
-    logLeft.style.transform = "scale(0)"
-})
-btnLogRight.addEventListener('mouseover' , function btnCilckRight (){
-    logRight.style.transform = "scale(1)"
-})
-btnLogRight.addEventListener('mouseout' , function btnOutRight (){
-    logRight.style.transform = "scale(0)"
+accountCreate.addEventListener('click' , function accountClickR() {
+    logRight.style.display = "none";
+    logLeft.style.display = "block";
+    logLeft.style.transform = "scale(1)";
+    logLeft.style.filter = "blur(0)"
 })

@@ -73,8 +73,8 @@ a{
     align-items: center;
 }
 .block-log{
-    width: 30%;
-    height: 80%;
+    min-width: 30%;
+    min-height: 50%;
     margin: 3%;
     background-color: rgb(187, 187, 187);
     border-radius: 15px;
@@ -87,28 +87,23 @@ a{
     flex-direction: column;
     position: relative;
     width: 60%;
-    height: 80%;
     margin: auto;
 }
 .log-input{
     margin-top: 20px;
-    border-radius: 7px;
+    border-radius: 15px;
     border: hidden;
+    line-height: 35px;
 }
 .log-submit{
-    position: absolute;
     display: flex;
     justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    bottom: 30px;
+    top: 200px;
 }
 .log-submit-btn{
     width: 200px;
 }
-.log-responsive{
+.account{
     display: none;
 }
 
@@ -117,10 +112,16 @@ a{
 .nav-link{
     display: inline-block;
 }
+.header-play nav ul{
+    padding-left: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
 .nav-link a{
     color: black;
-    margin: 10px;
-    padding: 8px 10px;
+    margin: 5px;
+    padding: 8px 15px;
 }
 .nav-link a:hover{
     animation: border;
@@ -137,11 +138,11 @@ a{
 .main-play{
     display: flex;
     justify-content: center;
-    margin: 0 20px;
 }
 .hello{
-    margin-bottom: 50px;
-    padding-left: 20px;
+    font-size: 1.5em;
+    text-align: center;
+    font-family: 'Courgette', cursive;
 }
 .contain-game-text{
     display: flex;
@@ -162,7 +163,7 @@ a{
     text-align: center;
 }
 .game-form label{
-    font-size: 25px;
+    font-size: 1.2em;
 }
 #id_letter_try{
     width: 30%;
@@ -176,6 +177,7 @@ a{
     box-shadow: rgba(0, 0, 0, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 }
 
+
 @media screen and (max-width: 767.9px){
     .index-button{
         width: 10em;
@@ -183,30 +185,57 @@ a{
     .main{
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
     }
     .block-log{
-        position: absolute;
-        width: 70%;
-        height: 40%;
-        transform: scale(0);
+        min-width: 70%;
+        min-height: 55%;
+        text-align: center;
     }
     .block-log h2{
         margin-bottom: 0;
     }
-    .log-responsive{
+    .log-submit{
+        top: 170px;
+    }
+    .account{
+        display: block;
+        margin-top: 15px;
+    }
+    #block-log-right{
+        display: none;
+    }
+    #account-connect{
+        margin-top: 50px;
+        color: #69925f;
+    }
+    #account-create{
+        margin-top: 30px;
+        color: #69925f;
+    }
+    .nav-link a{
+        padding: 5px 8px;
+    }
+    .feed{
+        margin-top: 20px;
+    }
+    .hello{
+        margin: 0;
+    }
+    .main-play{
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
     }
-    .log-responsive button{
-        margin: 10px;
-        padding: 10px;
-        border: transparent;
-        border-radius: 10px;
-        background-color: rgb(187, 187, 187);
-        font-size: 20px;
-        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+    .contain-game-text {
+        width: 300px;
+        height: 200px;
     }
+    .pendu-picture{
+        width: 200px;
+        height: 200px;
+    }
+
 }
 
 @keyframes border{
