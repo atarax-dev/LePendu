@@ -2,7 +2,6 @@ import uuid
 
 from django.contrib.auth import authenticate, logout, login
 from django.core.cache import cache
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from LePendu.forms import LetterForm
