@@ -123,11 +123,7 @@ a{
     margin: 5px;
     padding: 8px 15px;
 }
-.nav-link a:hover{
-    animation: border;
-    animation-duration: 1.5s;
-    animation-fill-mode: forwards;
-}
+
 
 /*JEU*/
 
@@ -236,22 +232,4 @@ a{
         height: 200px;
     }
 
-}
-
-@keyframes border{
-    0%{
-        border-bottom: solid 2px black;
-    }
-    25%{
-        border-bottom: solid 2px black;
-        border-left: solid 2px black ;
-    }
-    50%{
-        border-bottom: solid 2px black;
-        border-left: solid 2px black ;
-        border-top: solid 2px black ;
-    }
-    100%{
-        border: solid 2px black;
-    }
 }
