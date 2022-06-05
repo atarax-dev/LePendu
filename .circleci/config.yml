@@ -17,8 +17,6 @@ jobs:
       - run:
           name: Run tests
           command:
-            sudo apt-get update
-            sudo apt-get install postgresql-client
             python manage.py test -v 2
 
 
