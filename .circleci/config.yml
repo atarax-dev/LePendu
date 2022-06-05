@@ -7,16 +7,19 @@ orbs:
 
 jobs:
   tests:
-    executor: python/default
+    docker:
+      - image: cimg/python:3.10.2
+
     steps:
       - checkout
-      - python/load-cache
+      - python/install-packages:
+          pkg-manager: pip
       - run:
           name: Run tests
           command:
             sudo apt-get update
             sudo apt-get install postgresql-client
-            python -m pytest
+            python pytest
 
 
   heroku-deploy:
