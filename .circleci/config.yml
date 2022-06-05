@@ -16,7 +16,7 @@ jobs:
           pkg-manager: pip
       - run:
           name: Run tests
-          command:
+          command: |
             sudo apt-get update
             sudo apt-get install postgresql-client
             python pytest
