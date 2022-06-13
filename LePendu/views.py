@@ -105,7 +105,7 @@ def pendu_view(request):
 def ranking_view(request):
     players = User.objects.all()
     players = players.difference(User.objects.filter(username="superadmin"))
-    sorted_players = sorted(players, key=lambda player: player.win_rate, reverse=True)
+    sorted_players = sorted(players, key=lambda player: player.rank, reverse=True)
     return render(request,
                   'ranking.html', locals())
 
