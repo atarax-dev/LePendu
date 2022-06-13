@@ -22,6 +22,8 @@ class User(AbstractUser):
         sorted_players = sorted(players, key=lambda player: player.win_rate, reverse=True)
         for sorted_player in sorted_players:
             if sorted_player.username == self.username:
+                if self.username == "superadmin":
+                    return 0
                 rank = sorted_players.index(sorted_player) + 1
                 break
         return rank
