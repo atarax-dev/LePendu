@@ -18,12 +18,14 @@ class User(AbstractUser):
 
     @property
     def rank(self):
-        players = User.objects.all()
+        try:
+            players = User.objects.all()
+            players = players.difference(User.objects.filter(username="superadmin"))
+        except User.DoesNotExist:
+            players = User.objects.all()
         sorted_players = sorted(players, key=lambda player: player.win_rate, reverse=True)
         for sorted_player in sorted_players:
             if sorted_player.username == self.username:
-                if self.username == "superadmin":
-                    return 0
                 rank = sorted_players.index(sorted_player) + 1
                 break
         return rank
