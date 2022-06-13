@@ -16,10 +16,10 @@ jobs:
           pkg-manager: pip
       - run:
           name: Run tests
-          command:
+          command: |
             sudo apt-get update
             sudo apt-get install postgresql-client
-            python manage.py test -v 2
+            python -m pytest --disable-warnings --co
 
 
   heroku-deploy:
