@@ -1,19 +1,22 @@
 {% extends "base_template.html" %}
 {% block title %}Le Pendu{% endblock %}
 {% block content %}
-<div class="feed">
+<div class="profile-feed">
     {% if request.user.is_authenticated %}
     <p>Votre nom d'utilisateur: {{ request.user }}</p>
     <p>Parties jouées: {{ request.user.played_games }}</p>
     <p>Parties gagnées: {{ request.user.won_games }}</p>
     <p>Série de parties gagnées: {{ request.user.streak }}</p>
     <p>Taux de victoires: {{ request.user.win_rate }}%</p>
+</div>
     {% if badges %}
+<div class=badges>
+    <i class="fas fa-award"></i>
     <p>Vos badges gagnés:</p>
     {% for badge in badges %}
     <p>{{ badge.title }} : {{ badge.description }}</p>
     {% endfor %}
-    {% endif %}
-    {% endif %}
 </div>
+    {% endif %}
+    {% endif %}
 {% endblock %}

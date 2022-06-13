@@ -1,10 +1,10 @@
 {% extends "base_template.html" %}
 {% block title %}Classement des joueurs{% endblock %}
 {% block content %}
-<div class="feed">
-    <p>Classement</p>
+<div class="ranking-feed">
+    <p class="ranking"><u>Classement</u></p>
     {% for ranked_player in sorted_players %}
-    <p>- {{ ranked_player.rank }} {{ ranked_player }} : {{ ranked_player.win_rate }}% de victoires</p>
+    <p class="ranking-user">- {{ ranked_player.rank }} - {{ ranked_player }} : {{ ranked_player.win_rate }}% de victoires</p>
     {% endfor %}
     </div>
 {% endblock %}
