@@ -75,7 +75,7 @@ a{
 }
 .block-log{
     min-width: 30%;
-    min-height: 50%;
+    height: 70%;
     margin: 3%;
     background-color: rgb(187, 187, 187);
     border-radius: 15px;
@@ -125,6 +125,10 @@ a{
     padding: 8px 15px;
     margin: 5px;
 }
+.nav-link a:hover{
+    text-decoration: underline;
+    font-weight: bold;
+}
 
 
 /*JEU*/
@@ -164,7 +168,10 @@ a{
     font-size: 1.2em;
 }
 #id_letter_try{
-    width: 30%;
+    width: 7%;
+    height: 25px;
+    border-radius: 15px;
+    border-style: hidden;
 }
 .pendu-picture{
     width: 300px;
