@@ -156,7 +156,7 @@ a{
     background-color: white;
     border-radius: 20px;
     margin: 20px;
-    box-shadow: rgba(0, 0, 0, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    box-shadow: rgba(0, 0, 0, 0.48) 6px 2px 16px 0px, rgba(0, 0, 0, 0.48) -6px -2px 16px 0px;
 }
 .game-text{
     text-align: center;
@@ -168,9 +168,12 @@ a{
     font-size: 1.2em;
 }
 #id_letter_try{
-    width: 7%;
-    height: 25px;
-    border-radius: 15px;
+    width: 15%;
+    border-radius: 5px;
+    border-style: hidden;
+}
+#submit-btn{
+    border-radius: 5px;
     border-style: hidden;
 }
 .pendu-picture{
@@ -179,7 +182,7 @@ a{
     text-align: center;
     margin: 20px;
     border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    box-shadow: rgba(0, 0, 0, 0.48) 6px 2px 16px 0px, rgba(0, 0, 0, 0.48) -6px -2px 16px 0px;
 }
 .ranking-feed{
     width: 60%;
@@ -277,6 +280,9 @@ a{
     .pendu-picture{
         width: 200px;
         height: 200px;
+    }
+    #id_letter_try::placeholder{
+        font-size: 0em;
     }
     .ranking-feed{
         width: auto;
